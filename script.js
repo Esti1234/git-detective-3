@@ -1,8 +1,3 @@
-// My Tasks - a very simple task list
-
-// Show the tasks as soon as the script loads
-renderTasks();
-
 // The list of tasks. Each task has a text and a "done" flag.
 const tasks = [
   { text: "Buy milk", done: false },
@@ -14,6 +9,7 @@ const tasks = [
 
 // Elements from the page
 const taskList = document.getElementById("task-list");
+const taskCounter = document.getElementById("task-counter");
 const taskInput = document.getElementById("task-input");
 const addButton = document.getElementById("add-button");
 
@@ -50,6 +46,17 @@ function renderTasks() {
     item.appendChild(text);
     taskList.appendChild(item);
   }
+
+  updateCounter();
+}
+
+// Show how many tasks are not done yet
+function updateCounter() {
+  const left = tasks.filter(function (task) {
+    return !task.done;
+  }).length;
+
+  taskCounter.textContent = left + " tasks left";
 }
 
 // Add a new task from the text box
@@ -65,3 +72,6 @@ function addTask() {
 }
 
 addButton.addEventListener("click", addTask);
+
+// Show the tasks as soon as the script loads
+renderTasks();
